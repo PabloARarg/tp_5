@@ -21,13 +21,13 @@ SPDX-License-Identifier: MIT
 
 /** \brief define e implementa las funciones de call-back y los pasa como parametro de llamada
  **
- ** \addtogroup 
- ** \brief 
-  ** @see 
+ ** \addtogroup
+ ** \brief
+ ** @see
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
-#include"calculadora.h"
+#include "calculadora.h"
 
 /* === Macros definitions ====================================================================== */
 
@@ -43,34 +43,39 @@ SPDX-License-Identifier: MIT
 
 /* === Private function implementation ========================================================= */
 
-int suma(int a,int b){
+int vacio(int a, int b) {
 
-    return a+b;
+    return a;
 }
 
-int resta(int a,int b){
+int suma(int a, int b) {
 
-    return a-b;
+    return a + b;
 }
 
-int prducto(int a,int b){
+int resta(int a, int b) {
 
-    return a*b;
+    return a - b;
 }
 
-void main(void){
-    char a[]="12+13";
+int prducto(int a, int b) {
 
-    calculadora_t calculadora = CrearCalculadora();//crea la calculadora
+    return a * b;
+}
 
-    AgregarOperacionCalculadora(calculadora,'+',suma);//añade una operacion a la calculadora
-    AgregarOperacionCalculadora(calculadora,'-',resta);
-    AgregarOperacionCalculadora(calculadora,'*',prducto);
+void main(void) {
+    char a[] = "12+13";
+    int resulatado;
 
-    int resulatado=Calcular(calculadora,a);//calcula el valor de la operacion
+    calculadora_t calculadora = CrearCalculadora(); // crea la calculadora
+    AgregarOperacionCalculadora(calculadora, '!', vacio);
+    AgregarOperacionCalculadora(calculadora, '+', suma); // añade una operacion a la calculadora
+    AgregarOperacionCalculadora(calculadora, '-', resta);
+    AgregarOperacionCalculadora(calculadora, '*', prducto);
 
-    printf("\nResultado-> %i\r\n",resulatado);//muestra el resultado de la operacion
+    resulatado = Calcular(calculadora, a); // calcula el valor de la operacion
 
+    printf("\nResultado-> %i\r\n", resulatado); // muestra el resultado de la operacion
 }
 
 /* === Public function implementation ========================================================== */
