@@ -19,7 +19,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 /**
- * @file 
+ * @file delcara los tipos y las fuciones
  * @version 1.0.0
  * @date 14/4/2023
  * @author Pablo Rivas 
@@ -30,6 +30,10 @@ SPDX-License-Identifier: MIT
 #define TEMPLATE_H
 
 /* === Headers files inclusions ================================================================ */
+#include<stdbool.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -40,8 +44,21 @@ extern "C" {
 /* === Public macros definitions =============================================================== */
 
 /* === Public variable declarations ============================================================ */
+typedef struct calculadora_s *calculadora_t;
+
+typedef int(*funcion_t)(int,int);
 
 /* === Public function declarations ============================================================ */
+
+//crea una calculadora
+calculadora_t CrearCalculadora();
+
+//crea una operacion, envia el puntero de la calculadora, el simbolo que define la operacion
+//y la funcion asociada a ese simbolo
+bool AgregarOperacionCalculadora(calculadora_t calculadora,char operador,funcion_t funcion);
+
+//calcula la operacion
+int Calcular(calculadora_t calculadora,char *cadena);
 
 /* === End of documentation ==================================================================== */
 

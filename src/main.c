@@ -19,7 +19,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** \brief 
+/** \brief define e implementa las funciones de call-back y los pasa como parametro de llamada
  **
  ** \addtogroup 
  ** \brief 
@@ -27,6 +27,7 @@ SPDX-License-Identifier: MIT
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
+#include"calculadora.h"
 
 /* === Macros definitions ====================================================================== */
 
@@ -41,6 +42,36 @@ SPDX-License-Identifier: MIT
 /* === Private variable definitions ============================================================ */
 
 /* === Private function implementation ========================================================= */
+
+int suma(int a,int b){
+
+    return a+b;
+}
+
+int resta(int a,int b){
+
+    return a-b;
+}
+
+int prducto(int a,int b){
+
+    return a*b;
+}
+
+void main(void){
+    char a[]="12+13";
+
+    calculadora_t calculadora = CrearCalculadora();//crea la calculadora
+
+    AgregarOperacionCalculadora(calculadora,'+',suma);//añade una operacion a la calculadora
+    AgregarOperacionCalculadora(calculadora,'-',resta);
+    AgregarOperacionCalculadora(calculadora,'*',prducto);
+
+    int resulatado=Calcular(calculadora,a);//calcula el valor de la operacion
+
+    printf("\nResultado-> %i\r\n",resulatado);//muestra el resultado de la operacion
+
+}
 
 /* === Public function implementation ========================================================== */
 
