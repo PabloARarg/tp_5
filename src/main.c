@@ -19,11 +19,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** \brief define e implementa las funciones de call-back y los pasa como parametro de llamada
+/** \brief Trabanjo Practico N°5
  **
- ** \addtogroup
- ** \brief
- ** @see
+ ** \addtogroup tp5 TPN5 main
+ ** \brief Define e implementa las funciones de call-back y los pasa como parametro de llamada
+ ** @see main()
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
@@ -34,6 +34,13 @@ SPDX-License-Identifier: MIT
 /* === Private data type declarations ========================================================== */
 
 /* === Private variable declarations =========================================================== */
+int vacio(int a, int b); //!< **Funcion nula de callback**
+
+int suma(int a, int b); //!< **Funcion suma de callback**
+
+int resta(int a, int b); //!< **Funcion resta de callback**
+
+int prducto(int a, int b); //!< **Funcion producto de callback**
 
 /* === Private function declarations =========================================================== */
 
@@ -43,37 +50,55 @@ SPDX-License-Identifier: MIT
 
 /* === Private function implementation ========================================================= */
 
+/** @brief Primera funcion que se implementa para salvar un problea con el for de BuscarOperacion() */
 int vacio(int a, int b) {
 
     return a;
 }
 
+/** @brief Suma dos numeros*/
 int suma(int a, int b) {
 
     return a + b;
 }
 
+/** @brief Resta dos numeros*/
 int resta(int a, int b) {
 
     return a - b;
 }
 
+/** @brief Multiplica dos numeros*/
 int prducto(int a, int b) {
 
     return a * b;
 }
 
+/** ## Funcion principal*/
 void main(void) {
     char a[] = "12+13";
+    char b[] = "12-13";
+    char c[] = "12*13";
     int resulatado;
 
-    calculadora_t calculadora = CrearCalculadora(); // crea la calculadora
-    AgregarOperacionCalculadora(calculadora, '!', vacio);
-    AgregarOperacionCalculadora(calculadora, '+', suma); // añade una operacion a la calculadora
+    calculadora_t calculadora = CrearCalculadora();       // crea la calculadora
+    AgregarOperacionCalculadora(calculadora, '!', vacio); // el lop del for necesita una oper vacia
+    AgregarOperacionCalculadora(calculadora, '+', suma);  // añade una operacion a la calculadora
     AgregarOperacionCalculadora(calculadora, '-', resta);
     AgregarOperacionCalculadora(calculadora, '*', prducto);
 
     resulatado = Calcular(calculadora, a); // calcula el valor de la operacion
+
+    printf("\n%s", a);
+    printf("\nResultado-> %i\r\n", resulatado); // muestra el resultado de la operacion
+
+    resulatado = Calcular(calculadora, b); // calcula el valor de la operacion
+
+    printf("\n%s", b);
+    printf("\nResultado-> %i\r\n", resulatado); // muestra el resultado de la operacion
+
+    printf("\n%s", c);
+    resulatado = Calcular(calculadora, c); // calcula el valor de la operacion
 
     printf("\nResultado-> %i\r\n", resulatado); // muestra el resultado de la operacion
 }

@@ -30,33 +30,30 @@ SPDX-License-Identifier: MIT
 #include "calculadora.h"
 
 /* === Macros definitions ====================================================================== */
-#ifndef CANT_OPERACION
-#define CANT_OPERACION 5
-#endif
 
 /* === Private data type declarations ========================================================== */
 
-// define puntero a la estructura operaciones
+//! **Define puntero a la estructura operaciones**
 typedef struct operacion_s * operacion_t;
 
-// define una estructura para almacenar las funciones de operaciones asociada el simbolo
-// correspondiente
+//! Define una estructura para almacenar las funciones de operaciones asociada el simbolo correspondiente
 struct operacion_s {
-    char operador;
-    funcion_t funcion;
-    operacion_t siguiente; // almacena la direccion de la siguiente operacion
+    char operador;         //!< Almacena el operador que define la operacion
+    funcion_t funcion;     //!< Almcacena la funcion que implementa la operacion(_puntero_)
+    operacion_t siguiente; //!< Almacena la direccion de la siguiente operacion(_puntero_)
 };
 
 // define la estructura de una objeto calculadora con un grupo definido de slots para almacenar
 // operaciones
 struct calculadora_s {
-    operacion_t operaciones;
+    operacion_t operaciones; //!< Almacena la direccion de ultima operacion(_puntero_)
 };
 
 /* === Private variable declarations =========================================================== */
 
 /* === Private function declarations =========================================================== */
 
+//! **Busca una operacion entre las almacenadas**
 operacion_t BuscarOperacion(calculadora_t calculadora, char operador);
 
 /* === Public variable definitions ============================================================= */
@@ -65,16 +62,16 @@ operacion_t BuscarOperacion(calculadora_t calculadora, char operador);
 
 /* === Private function implementation ========================================================= */
 
-// funcion interna para buscar la operacion
+/** @brief Funcion interna para buscar la operacion mediante la coincidencia del operador*/
 operacion_t BuscarOperacion(calculadora_t calculadora, char operador) {
     operacion_t result = NULL;
     // evita que se ejecute si calculadora es NULL->si calculadora es null ->
     // calculadora.operaciones=null
     if (calculadora) {
-        for (operacion_t actual = calculadora->operaciones; actual->siguiente != NULL;
-             actual = actual->siguiente) {      // busca mediante enlaces por punteros
+        // busca mediante enlaces por punteros
+        for (operacion_t actual = calculadora->operaciones; actual->siguiente != NULL; actual = actual->siguiente) {
             if (actual->operador == operador) { // compara con un operador
-                result = actual; // almacena para la salida la direcion del * operacion
+                result = actual;                // almacena para la salida la direcion del * operacion
                 break;
             }
         }
@@ -84,7 +81,7 @@ operacion_t BuscarOperacion(calculadora_t calculadora, char operador) {
 
 /* === Public function implementation ========================================================== */
 
-// crea el objeto calculadora
+// Crea el objeto calculadora
 calculadora_t CrearCalculadora() {
     calculadora_t result = malloc(sizeof(struct calculadora_s));
     if (result)
@@ -123,7 +120,7 @@ int Calcular(calculadora_t calculadora, char * cadena) {
         // en ASCCI los operadores tienen valores menores a los char numeros y lo busca asi
         if (cadena[indice] < '0') {
             operador = cadena[indice];
-            a = atoi(cadena); // guada el primer numero de la cadena y lo corta el operador
+            a = atoi(cadena);              // guada el primer numero de la cadena y lo corta el operador
             b = atoi(cadena + indice + 1); // guarda el segundo numero
             break;
         }
