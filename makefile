@@ -41,9 +41,9 @@ $(BIN_DIR): $(BUILD_DIR)
 # crea la carpeta doc
 $(DOC_DIR): $(BUILD_DIR)
 	mkdir -p $(DOC_DIR)
-# Convertir archivos .c en .o
+# Convertir archivos .c en .o // se puede añadir parametros para la compilacion y debug
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
-	gcc -c $< -o $@
+	gcc -g -c $< -o $@
 # Comprobacion por terminal y compila
 all: $(OBJ_FILES) $(BIN_DIR)
 	echo $(SRC_FILES)
